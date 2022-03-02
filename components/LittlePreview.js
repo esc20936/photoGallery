@@ -7,7 +7,7 @@ const LittlePreviewCard = (props) =>{
   
 
     titulo = (titulo.length >13)? titulo.substring(0,13)+"... ":titulo;
-    author = (author.length >13)? author.substring(0,19)+"... ":author;
+    author = (author.length >13)? author.substring(0,13)+"... ":author;
 
     return (
         <View style={styles.container}> 
@@ -76,9 +76,9 @@ const styles = StyleSheet.create({
         fontFamily: (Platform.OS==="android") ? "Roboto":"Helvetica",
         fontWeight:'bold',
         fontSize:10,
-        marginTop:2,
+        marginTop:5,
         marginLeft:10,
-        color:'#919191'
+        color:'#919191',
 
     }
 });
