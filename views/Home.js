@@ -9,36 +9,51 @@ var theme;
 export default function Home() {
 
  var [theme,setTheme] = useState("light");
+
+ const colores ={
+   light: {
+     fondo:"#f5f5f5",
+     textoPrincipal:"#000",
+     littlePreviewContainer:"#fff",
+     textoSecundario:'#919191'
+   },
+   dark: {
+    fondo:"#22232f",
+    textoPrincipal:"#f5f5f5",
+    littlePreviewContainer:"#383b51",
+     textoSecundario:'#919191'
+   }
+ }
  
   
 
   return (  
-    <SafeAreaView style={[styles.container,{backgroundColor:(theme==="light")? '#f0f0f0': "#000433"}]}>
+    <SafeAreaView style={[styles.container,{backgroundColor:(theme==="light")? colores.light.fondo:colores.dark.fondo}]}>
     
-        <View style={[styles.titleContainer,{backgroundColor: (theme==="light")? '#f0f0f0': "#000433",}]}>
-          <Text style={[styles.title,{color: (theme==="light")? 'black': "#f5f5f5"}]}>Photo Gallery</Text>
-          <TouchableOpacity style={styles.lightNightMode} onPress={() =>{setTheme((theme==="light")? "dark":"light");}}>
+        <View style={[styles.titleContainer,{backgroundColor:(theme==="light")? colores.light.fondo:colores.dark.fondo,}]}>
+          <Text style={[styles.title,{color:(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal}]}>Photo Gallery</Text>
+          <TouchableOpacity style={styles.lightNightMode} onPress={() =>{setTheme((theme==="light")? "dark":"light"); }}>
             <MaterialCommunityIcons name="theme-light-dark" size={24} color={(theme==="light")? "black": "white"} />
           </TouchableOpacity>
         </View>
     
-        <View style={[styles.mainView,{backgroundColor: (theme==="light")? '#f0f0f0': "#000433",}]}>
+        <View style={[styles.mainView,{backgroundColor:(theme==="light")? colores.light.fondo:colores.dark.fondo,}]}>
           <ScrollView>
-            <View style={[styles.scrollViewContainer,{backgroundColor: (theme==="light")? '#f0f0f0': "#000433",}]}>
+            <View style={[styles.scrollViewContainer,{backgroundColor:(theme==="light")? colores.light.fondo:colores.dark.fondo,}]}>
                 <ScrollView horizontal={true} bounces={false} style={{width: '100%'}} endFillColor={"#e0e0e0"}>
-                    <LittlePreviewCard ruta={{uri:'https://picsum.photos/200?random=1'}} author="Pablo Escobar" title="Mi diseno especial" />
-                    <LittlePreviewCard ruta={{uri:'https://picsum.photos/200?random=2'}} author="Arutro Espada" title="La experiencia"/>
-                    <LittlePreviewCard ruta={{uri:'https://picsum.photos/200?random=3'}} author="Mariana David" title="AMM"/>
-                    <LittlePreviewCard ruta={{uri:'https://picsum.photos/200?random=4'}} author="Fredy Velasquez" title="Mi obra"/>
-                    <LittlePreviewCard ruta={{uri:'https://picsum.photos/200?random=5'}} author="Angel Higueros" title="Historia de mi vida"/>
-                    <LittlePreviewCard ruta={{uri:'https://picsum.photos/200?random=6'}} author="Alejandra Guzman Sagastume" title="No no"/>
-                    <LittlePreviewCard ruta={{uri:'https://picsum.photos/200?random=7'}} author="Pablo Escobar" title="Mi diseno especial"/>
+                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/200?random=1'}} author="Pablo Escobar" title="Mi diseno especial" />
+                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=2'}} author="Arutro Espada" title="La experiencia"/>
+                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=3'}} author="Mariana David" title="AMM"/>
+                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=4'}} author="Fredy Velasquez" title="Mi obra"/>
+                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=5'}} author="Angel Higueros" title="Historia de mi vida"/>
+                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=6'}} author="Alejandra Guzman Sagastume" title="No no"/>
+                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=7'}} author="Pablo Escobar" title="Mi diseno especial"/>
                 </ScrollView>
             </View>
-            <View style={[styles.publications,{backgroundColor: (theme==="light")? '#f0f0f0': "#000433",}]}>
+            <View style={[styles.publications,{backgroundColor:(theme==="light")? colores.light.fondo:colores.dark.fondo,}]}>
               <View style={[styles.titleContainer,{alignSelf:"flex-start",marginTop:0,marginLeft:7}]}>
               
-                <Text style={[styles.title,{color: (theme==="light")? 'black': "#f5f5f5"}]}>Most popular</Text>
+                <Text style={[styles.title,{color:(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal}]}>Most popular</Text>
               </View>
 
             </View>
@@ -103,3 +118,4 @@ const styles = StyleSheet.create({
 
   }
 });
+

@@ -10,14 +10,14 @@ const LittlePreviewCard = (props) =>{
     author = (author.length >13)? author.substring(0,13)+"... ":author;
 
     return (
-        <View style={styles.container}> 
-            <TouchableOpacity style={styles.touchableOpacity}>
-                <View style={styles.ImageContainer}>
-                    <Image source={props.ruta} style={styles.image}/>
+        <View style={[stylesLittlePreview.container,{backgroundColor:props.fondo}]}> 
+            <TouchableOpacity style={stylesLittlePreview.touchableOpacity}>
+                <View style={[stylesLittlePreview.ImageContainer,{backgroundColor:props.fondo}]}>
+                    <Image source={props.ruta} style={stylesLittlePreview.image}/>
                 </View>
-                <View style={styles.descriptionContainer}>
-                    <Text style={styles.title}>{titulo}</Text>
-                    <Text style={styles.author}>{author}</Text>
+                <View style={[stylesLittlePreview.descriptionContainer,{backgroundColor:props.fondo}]}>
+                    <Text style={[stylesLittlePreview.title,{color:props.colorT}]}>{titulo}</Text>
+                    <Text style={[stylesLittlePreview.author]}>{author}</Text>
                 </View>
             </TouchableOpacity>
             
@@ -26,14 +26,14 @@ const LittlePreviewCard = (props) =>{
     )
 };
 
-const styles = StyleSheet.create({
+const stylesLittlePreview = StyleSheet.create({
     container: {
         height:160,
-        width:160,
+        width:140,
         backgroundColor:"#fff",
         alignSelf:'center',
         marginLeft:20,
-        borderRadius:30,
+        borderRadius: (Platform.OS==="android")? 25:30,
        
 
     },
