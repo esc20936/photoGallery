@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+import { setStatusBarStyle, StatusBar } from 'expo-status-bar';
 import React,{useState,useRef, useEffect} from 'react';
 import { StyleSheet, Text, View,Platform,SafeAreaView,ScrollView,RefreshControl,TouchableOpacity} from 'react-native';
 import { NavigationContainer , StackActions, NavigationActions } from '@react-navigation/native';
@@ -6,12 +6,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LittlePreviewCard from '../components/LittlePreview.js';
 import Publication from '../components/Publication.js';
 import { MaterialCommunityIcons,Entypo,FontAwesome,MaterialIcons,FontAwesome5} from '@expo/vector-icons';
+import Colores from '../components/ColorsConfig.js';
 const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 }
-
 export default function Home() {
 
+  const [theme,setTheme] = useState("dark");
+
+  
   
   const scrollRef = useRef();
   const [refreshing, setRefreshing] = React.useState(false);
@@ -28,77 +31,64 @@ export default function Home() {
   }
   
 
- var [theme,setTheme] = useState("light");
+ 
 
- const colores ={
-   light: {
-     fondo:"#efecec",
-     textoPrincipal:"#000",
-     littlePreviewContainer:"#fff",
-     textoSecundario:'#919191'
-   },
-   dark: {
-    fondo:"#22232f",
-    textoPrincipal:"#f5f5f5",
-    littlePreviewContainer:"#383b51",
-     textoSecundario:'#919191'
-   }
- }
+
  
 
 
   
 
   return (  
-    <SafeAreaView style={[styles.container,{backgroundColor:(theme==="light")? colores.light.fondo:colores.dark.fondo}]}>
-      <StatusBar style={(theme==="light")? "dark":"light"} backgroundColor={(theme==="light")? colores.light.fondo:colores.dark.fondo}/>
-        <View style={[styles.titleContainer,{backgroundColor:(theme==="light")? colores.light.fondo:colores.dark.fondo,}]}>
-          <Text style={[styles.title,{color:(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal}]}>Photo Gallery</Text>
-          <TouchableOpacity style={styles.lightNightMode} onPress={() =>{setTheme((theme==="light")? "dark":"light"); }}>
-            <MaterialCommunityIcons name="theme-light-dark" size={24} color={(theme==="light")? "black": "white"} />
+    <SafeAreaView style={[styles.container,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo}]}>
+      <StatusBar  style={(theme==="light")? "dark" : "light"} backgroundColor={(theme==="light")? Colores.light.fondo:Colores.dark.fondo}/>
+        <View style={[styles.titleContainer,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo,}]}>
+          <Text style={[styles.title,{color:(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal}]}>Photo Gallery</Text>
+          <TouchableOpacity style={styles.lightNightMode} onPress={() =>{setTheme((theme==="light")? "dark":"light");}}>
+            {/* <MaterialCommunityIcons name="theme-light-dark" size={24} color={(theme==="light")? "black": "white"} /> */}
           </TouchableOpacity>
         </View>
     
-        <View style={[styles.mainView,{backgroundColor:(theme==="light")? colores.light.fondo:colores.dark.fondo,}]}>
+        <View style={[styles.mainView,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo,}]}>
           <ScrollView overScrollMode={"never"}  refreshControl={
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
           />
         } ref={scrollRef}>
-            <View style={[styles.scrollViewContainer,{backgroundColor:(theme==="light")? colores.light.fondo:colores.dark.fondo,}]}>
+            <View style={[styles.scrollViewContainer,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo,}]}>
                 <ScrollView horizontal={true} bounces={false} style={{width: '100%'}} endFillColor={"#e0e0e0"} overScrollMode={"never"}>
-                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=1'}} author="Pablo Escobar" title="Mi diseno especial" />
-                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=2'}} author="Arutro Espada" title="La experiencia"/>
-                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=3'}} author="Mariana David" title="AMM"/>
-                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=4'}} author="Fredy Velasquez" title="Mi obra"/>
-                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=5'}} author="Angel Higueros" title="Historia de mi vida"/>
-                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=6'}} author="Alejandra Guzman Sagastume" title="No no"/>
-                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=7'}} author="Pablo Escobar" title="Mi diseno especial"/>
+                    <LittlePreviewCard fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=1'}} author="Pablo Escobar" title="Mi diseno especial" />
+                    <LittlePreviewCard fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=2'}} author="Arutro Espada" title="La experiencia"/>
+                    <LittlePreviewCard fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=3'}} author="Mariana David" title="AMM"/>
+                    <LittlePreviewCard fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=4'}} author="Fredy Velasquez" title="Mi obra"/>
+                    <LittlePreviewCard fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=5'}} author="Angel Higueros" title="Historia de mi vida"/>
+                    <LittlePreviewCard fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=6'}} author="Alejandra Guzman Sagastume" title="No no"/>
+                    <LittlePreviewCard fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=7'}} author="Pablo Escobar" title="Mi diseno especial"/>
                 </ScrollView>
             </View>
-            <View style={[styles.publications,{backgroundColor:(theme==="light")? colores.light.fondo:colores.dark.fondo,}]}>
+            <View style={[styles.publications,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo,}]}>
               <View style={[styles.titleContainer,{alignSelf:"flex-start",marginTop:0,marginLeft:7,marginBottom:20}]}>
               
-                <Text style={[styles.title,{color:(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal}]}>Most popular</Text>
+                <Text style={[styles.title,{color:(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal}]}>Most popular</Text>
               </View>
               
-              <Publication fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=8'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=9'}} author="Pablo Escobar" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"      place="Nueva Zelanda"/>
-              <Publication fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=10'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=11'}} author="Andres de Jesus" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"  place="España"/>
-              <Publication fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=12'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=13'}} author="Fatima Monzon" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"    place="Alemania"/>
-              <Publication fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=14'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=15'}} author="Luis Cordoba" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"     place="Guatemala"/>
-              <Publication fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=16'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=17'}} author="Andres Felipe" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"    place="USA"/>
-              <Publication fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=18'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=19'}} author="Paolo Contreras" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"  place="Brasil"/>
-              <Publication fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=20'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=21'}} author="Luis Ceballos" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"    place="Argentina"/>
-              <Publication fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=22'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=23'}} author="Jenny Sosa" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"       place="Mexico"/>
-              <Publication fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=24'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=25'}} author="Pablo Soto" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"       place="Guatemala"/>
-              <Publication fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=26'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=27'}} author="Aby Sandoval" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"     place="Suiza"/>
+              <Publication fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=8'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=9'}} author="Pablo Escobar" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"      place="Nueva Zelanda"/>
+              <Publication fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=10'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=11'}} author="Andres de Jesus" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"  place="España"/>
+              <Publication fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=12'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=13'}} author="Fatima Monzon" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"    place="Alemania"/>
+              <Publication fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=14'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=15'}} author="Luis Cordoba" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"     place="Guatemala"/>
+              <Publication fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=16'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=17'}} author="Andres Felipe" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"    place="USA"/>
+              <Publication fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=18'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=19'}} author="Paolo Contreras" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"  place="Brasil"/>
+              <Publication fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=20'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=21'}} author="Luis Ceballos" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"    place="Argentina"/>
+              <Publication fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=22'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=23'}} author="Jenny Sosa" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"       place="Mexico"/>
+              <Publication fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=24'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=25'}} author="Pablo Soto" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"       place="Guatemala"/>
+              <Publication fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} colorT={(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=26'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=27'}} author="Aby Sandoval" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50"     place="Suiza"/>
 
             </View>
 
           </ScrollView>
         </View>
-        <View style={[styles.tabNavigator,{backgroundColor:(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer}]}>
+        {/* <View style={[styles.tabNavigator,{backgroundColor:(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer}]}>
           <TouchableOpacity style={styles.tabIcon} activeOpacity={0.5} onPress={()=>{onPressTouch();onRefresh()}}>
             <Entypo name="home" size={30} color={(theme==="light")? "black": "white"}/>
           </TouchableOpacity>
@@ -111,7 +101,7 @@ export default function Home() {
           <TouchableOpacity style={[styles.tabIcon]} activeOpacity={0.5}>
             <FontAwesome5 name="shopping-bag" size={30} color={(theme==="light")? "black": "white"}/>
           </TouchableOpacity>
-        </View>
+        </View> */}
        
         
     </SafeAreaView>
@@ -144,7 +134,7 @@ const styles = StyleSheet.create({
       
   },
   mainView:{
-    flex:0.82,
+    flex:0.9,
     marginTop:10,
     width:"95%",
     justifyContent: 'center',
