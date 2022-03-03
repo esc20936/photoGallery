@@ -1,11 +1,11 @@
 import React,{useState} from 'react';
 import {StyleSheet, Text, Image,View,TouchableOpacity} from 'react-native';
-import { AntDesign } from '@expo/vector-icons'; 
+import { AntDesign,  FontAwesome5,MaterialIcons,FontAwesome } from '@expo/vector-icons'; 
 
 const Publication = (props) => {
 
     const [heartIcon,setStateHearthIcon] = useState('hearto');
-
+    const [backCount,setStateBackCount] = useState(1);
 
     return (
         <View style={[styles.publicationContainer,{backgroundColor:props.fondo}]}>
@@ -20,12 +20,34 @@ const Publication = (props) => {
 
             </View>
             <View style={[styles.publicationPhotoContainer]}>
-                <Image source={props.ruta} style={[styles.publicationPhoto]}/>
+                <TouchableOpacity activeOpacity={0.7}  onPress={() => {
+                        setStateBackCount(backCount+1);
+                        if (backCount == 2) {
+                            
+                            setStateHearthIcon((heartIcon==="hearto")? "heart": "hearto");
+                            
+                        } else {
+                            let backTimer = setTimeout(() => {
+                             setStateBackCount(1);
+                            }, 1000) 
+                        }
+
+                    }}>
+                    <Image source={props.ruta} style={[styles.publicationPhoto]}/>
+                </TouchableOpacity>
             </View>
             <View style={[styles.publicationInteractionsContainer]}>
                 <TouchableOpacity onPress={()=>setStateHearthIcon((heartIcon==="hearto")? "heart": "hearto")}>
-                    <AntDesign name={heartIcon} size={32} style={[styles.heartIcon,{color:props.colorT},{color:(heartIcon==="hearto")? props.colorT: "#bd4747"}]}  />
+                    <AntDesign name={heartIcon} size={30} style={[styles.heartIcon,{color:props.colorT},{color:(heartIcon==="hearto")? props.colorT: "#bd4747"}]}  />
                 </TouchableOpacity>
+                <TouchableOpacity >
+                    <FontAwesome5 name="comment" size={30} style={[styles.heartIcon,{color:props.colorT}]}   />
+                </TouchableOpacity>
+                <View style={[styles.saveContainer]}>
+                    <TouchableOpacity >
+                        <FontAwesome name="share" size={28} style={[styles.heartIcon,{color:props.colorT,marginRight:0}]}  />
+                    </TouchableOpacity>
+                </View>    
             </View>
         </View>
 
@@ -36,9 +58,10 @@ const Publication = (props) => {
 const styles = StyleSheet.create({
     publicationContainer: {
         width:"95%",
-        height:480,
+        height:450,
         alignSelf:'center',
-        flex:1,        
+        flex:1,
+        marginTop:10    
         
     },
     publicationHeader:{
@@ -81,14 +104,14 @@ const styles = StyleSheet.create({
         fontFamily: (Platform.OS==="android") ? "Roboto":"Helvetica",
         fontWeight:'bold',
         fontSize:12,
-        marginTop:5,
+        marginTop:2,
         marginLeft:10,
         color:'#919191',
     },
     publicationPhotoContainer: {
         width:'100%',
-        flex:0.65,
-        backgroundColor:'blue',
+        flex:0.70,
+        // backgroundColor:'blue',
         overflow:"hidden",
     },
     publicationPhoto:{
@@ -97,17 +120,24 @@ const styles = StyleSheet.create({
         resizeMode:"stretch"
     },
     publicationInteractionsContainer:{
-        flex:0.1,
+        flex:0.15,
         width:'100%',
-        // backgroundColor:'#fff',
+        // backgroundColor:'red',
         flexDirection:'row',
         alignItems:"center",
         justifyContent:"flex-start",
     },
     heartIcon:{
         marginLeft:20,
-        marginTop:10,
         
+    },
+    saveContainer:{
+        // backgroundColor:'green',
+        height:'100%',
+        width:'65%',
+        justifyContent:'center',
+        alignItems:'flex-end',
+        alignSelf:'flex-end'
     }
 });
 

@@ -11,7 +11,7 @@ const LittlePreviewCard = (props) =>{
 
     return (
         <View style={[stylesLittlePreview.container,{backgroundColor:props.fondo}]}> 
-            <TouchableOpacity style={stylesLittlePreview.touchableOpacity}>
+            <TouchableOpacity style={[stylesLittlePreview.touchableOpacity,{backgroundColor:props.fondo}]} activeOpacity={0.7}>
                 <View style={[stylesLittlePreview.ImageContainer,{backgroundColor:props.fondo}]}>
                     <Image source={props.ruta} style={stylesLittlePreview.image}/>
                 </View>
@@ -38,29 +38,28 @@ const stylesLittlePreview = StyleSheet.create({
 
     },
     touchableOpacity:{
-        borderRadius:30,
+        borderRadius: (Platform.OS==="android")? 25:30,
         width:"100%",
         height:"100%",
 
     },
     ImageContainer:{
         flex:0.6,
-        borderTopRightRadius:30,
-        borderTopLeftRadius:30,
+        borderTopRightRadius:(Platform.OS==="android")? 25:30,
+        borderTopLeftRadius:(Platform.OS==="android")? 25:30,
         overflow:'hidden',
 
     },
     image:{
         width:'100%',
         height:'100%',
-        resizeMode:'stretch',
-        borderTopRightRadius:30,
-        borderTopLeftRadius:30
+        resizeMode:'cover',
+       
     },
     descriptionContainer:{
         flex:0.4,
-        borderBottomRightRadius:30,
-        borderBottomLeftRadius:30,
+        borderBottomRightRadius:(Platform.OS==="android")? 25:30,
+        borderBottomLeftRadius:(Platform.OS==="android")? 25:30,
         backgroundColor:"#fff",
         justifyContent: 'flex-start',
         
