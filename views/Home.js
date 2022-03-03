@@ -4,8 +4,9 @@ import { StyleSheet, Text, View,Platform,SafeAreaView,ScrollView,RefreshControl,
 import { NavigationContainer , StackActions, NavigationActions } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LittlePreviewCard from '../components/LittlePreview.js';
+import Publication from '../components/Publication.js';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-var theme;
+
 export default function Home() {
 
  var [theme,setTheme] = useState("light");
@@ -38,10 +39,10 @@ export default function Home() {
         </View>
     
         <View style={[styles.mainView,{backgroundColor:(theme==="light")? colores.light.fondo:colores.dark.fondo,}]}>
-          <ScrollView>
+          <ScrollView overScrollMode={"never"}>
             <View style={[styles.scrollViewContainer,{backgroundColor:(theme==="light")? colores.light.fondo:colores.dark.fondo,}]}>
-                <ScrollView horizontal={true} bounces={false} style={{width: '100%'}} endFillColor={"#e0e0e0"}>
-                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/200?random=1'}} author="Pablo Escobar" title="Mi diseno especial" />
+                <ScrollView horizontal={true} bounces={false} style={{width: '100%'}} endFillColor={"#e0e0e0"} overScrollMode={"never"}>
+                    <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=1'}} author="Pablo Escobar" title="Mi diseno especial" />
                     <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=2'}} author="Arutro Espada" title="La experiencia"/>
                     <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=3'}} author="Mariana David" title="AMM"/>
                     <LittlePreviewCard fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/300/200?random=4'}} author="Fredy Velasquez" title="Mi obra"/>
@@ -51,10 +52,12 @@ export default function Home() {
                 </ScrollView>
             </View>
             <View style={[styles.publications,{backgroundColor:(theme==="light")? colores.light.fondo:colores.dark.fondo,}]}>
-              <View style={[styles.titleContainer,{alignSelf:"flex-start",marginTop:0,marginLeft:7}]}>
+              <View style={[styles.titleContainer,{alignSelf:"flex-start",marginTop:0,marginLeft:7,marginBottom:20}]}>
               
                 <Text style={[styles.title,{color:(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal}]}>Most popular</Text>
               </View>
+              
+              <Publication fondo={(theme==="light")? colores.light.littlePreviewContainer:colores.dark.littlePreviewContainer} colorT={(theme==="light")? colores.light.textoPrincipal:colores.dark.textoPrincipal} ruta={{uri:'https://picsum.photos/400/450?random=8'}} authorPhoto={{uri:'https://picsum.photos/300/200?random=9'}} author="Pablo Escobar" title="Mi diseno especial" description="me gusto mucho mi viaje, aprendi muchas cosas nuevas y bla bla bla" likes="50" place="Nueva Zelanda"/>
 
             </View>
 
