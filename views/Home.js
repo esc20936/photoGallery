@@ -7,15 +7,12 @@ import LittlePreviewCard from '../components/LittlePreview.js';
 import Publication from '../components/Publication.js';
 import { MaterialCommunityIcons,Entypo,FontAwesome,MaterialIcons,FontAwesome5} from '@expo/vector-icons';
 import Colores from '../components/ColorsConfig.js';
+
 const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 }
-export default function Home() {
+export default function Home({navigation}) {
 
-  const [theme,setTheme] = useState("dark");
-
-  
-  
   const scrollRef = useRef();
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -29,15 +26,8 @@ export default function Home() {
       animated: true,
     });
   }
-  
 
- 
-
-
- 
-
-
-  
+  const theme = Colores.theme;
 
   return (  
     <SafeAreaView style={[styles.container,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo}]}>
@@ -45,7 +35,6 @@ export default function Home() {
         <View style={[styles.titleContainer,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo,}]}>
           <Text style={[styles.title,{color:(theme==="light")? Colores.light.textoPrincipal:Colores.dark.textoPrincipal}]}>Photo Gallery</Text>
           <TouchableOpacity style={styles.lightNightMode} onPress={() =>{setTheme((theme==="light")? "dark":"light");}}>
-            {/* <MaterialCommunityIcons name="theme-light-dark" size={24} color={(theme==="light")? "black": "white"} /> */}
           </TouchableOpacity>
         </View>
     
@@ -88,21 +77,6 @@ export default function Home() {
 
           </ScrollView>
         </View>
-        {/* <View style={[styles.tabNavigator,{backgroundColor:(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer}]}>
-          <TouchableOpacity style={styles.tabIcon} activeOpacity={0.5} onPress={()=>{onPressTouch();onRefresh()}}>
-            <Entypo name="home" size={30} color={(theme==="light")? "black": "white"}/>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.tabIcon} activeOpacity={0.5}>
-            <FontAwesome name="search" size={30} color={(theme==="light")? "black": "white"} />
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.tabIcon,]} activeOpacity={0.5}>
-            <MaterialIcons name="video-library" size={30} color={(theme==="light")? "black": "white"}/>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.tabIcon]} activeOpacity={0.5}>
-            <FontAwesome5 name="shopping-bag" size={30} color={(theme==="light")? "black": "white"}/>
-          </TouchableOpacity>
-        </View> */}
-       
         
     </SafeAreaView>
   );
@@ -134,7 +108,7 @@ const styles = StyleSheet.create({
       
   },
   mainView:{
-    flex:0.9,
+    flex:0.82,
     marginTop:10,
     width:"95%",
     justifyContent: 'center',
