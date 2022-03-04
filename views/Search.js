@@ -10,10 +10,10 @@ const theme = Colores.theme;
 const createImages = (even) => {
     let cont = (even)? 28:29;
     let lista = [];
-    for (let i = 0; i < 20; i++){
+    for (let i = 0; i < 15; i++){
         let size = Math.floor(Math.random() * (190 - 120 +1)) + 120;
         lista.push(
-            <ImagesSearch altura={size} fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} ruta={{uri:'https://picsum.photos/140/'+size+'?random='+cont}} />
+            <ImagesSearch altura={size} fondo={(theme==="light")? Colores.light.littlePreviewContainer:Colores.dark.littlePreviewContainer} ruta={{uri:'https://picsum.photos/140/'+size+'?random='+cont}} key={i} />
         );
         cont+=2; //
     }
@@ -82,28 +82,31 @@ export default function Search(){
 
                 </View>
             </View>
-            <ScrollView style={[styles.scrollViewContainer,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo,},]} refreshControl={
-          <RefreshControl
+          <View style={[styles.scrollContainer]}>
+            
+          <ScrollView style={[styles.scrollViewContainer,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo,},{backgroundColor:"#ffffff00"}]} refreshControl={
+            <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-          />
-        } ref={scrollRef}>
+            />
+          } ref={scrollRef}>
 
-                <View style={[styles.mainView,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo,}]}>
+                <View style={[styles.mainView,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo,},{backgroundColor:'#ffffff00'}]}>
 
-                    <View style={[styles.firstColumn,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo}]}>
+                    <View style={[styles.firstColumn,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo},{backgroundColor:'#ffffff00'}]}>
 
                         {lista}
                         {lista2}
 
                     </View>
-                    <View style={[styles.secondColumn,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo}]}>
+                    <View style={[styles.secondColumn,{backgroundColor:(theme==="light")? Colores.light.fondo:Colores.dark.fondo},{backgroundColor:'#ffffff00'}]}>
                         {lista2}
                         {lista}
 
                     </View>
                 </View>
             </ScrollView>
+          </View>
         </SafeAreaView>
 
     )
@@ -119,7 +122,7 @@ const styles = StyleSheet.create({
   searhBarContainer: {
     flex: 0.10,
     flexDirection:'row',
-    marginTop:20,
+    marginTop:10,
     marginLeft:27,
     marginRight:27,
     justifyContent:'center',
@@ -176,10 +179,13 @@ const styles = StyleSheet.create({
    
   },
   scrollViewContainer:{
-    flex:0.6,
-    marginTop:10,
     width:"90%",
-    //   backgroundColor:'red'
+    backgroundColor:'red',
+  },
+  scrollContainer:{
+
+    marginTop:10,
+    flex:0.81
   }
 
 })

@@ -4,8 +4,9 @@ import { AntDesign,  FontAwesome5,MaterialIcons,FontAwesome } from '@expo/vector
 
 const Publication = (props) => {
 
-    const [heartIcon,setStateHearthIcon] = useState('hearto');
     const [backCount,setStateBackCount] = useState(1);
+    const [heartIcon,setStateHearthIcon] = useState('hearto');
+
 
     return (
         <View style={[styles.publicationContainer,{backgroundColor:props.fondo}]}>

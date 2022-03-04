@@ -54,8 +54,8 @@ function App() {
         
         <Tab.Screen name="Home" tema={theme}  component={Home} options={{headerShown: false}}/>
         <Tab.Screen name="Search" tema={theme}  component={Search} options={{headerShown: false}}/>
-        {/* <Tab.Screen name="reels"  tema={theme}  component={Home} options={{headerShown: false}}/>
-        <Tab.Screen name="Shop" tema={theme}  component={Home} options={{headerShown: false}}/> */}
+         <Tab.Screen name="reels"  tema={theme}  component={Home} options={{headerShown: false}}/>
+       {/* <Tab.Screen name="Shop" tema={theme}  component={Home} options={{headerShown: false}}/> */}
 
       </Tab.Navigator>
     </NavigationContainer>
