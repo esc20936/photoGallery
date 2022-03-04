@@ -106,7 +106,8 @@ const styles = StyleSheet.create({
         height:60,
         width:"100%",
         zIndex:1,
-        bottom:2,
+        bottom:(Platform.OS==="android")? 2:20,
+
 
     },
     userInfoFooter:{
