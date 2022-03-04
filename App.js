@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons,Entypo,FontAwesome,MaterialIcons,FontAwesome5} from '@expo/vector-icons';
 import Search from './views/Search.js';
 import Colores from './components/ColorsConfig.js';
-
+import Reels from './views/Reels.js';
 const Tab = createBottomTabNavigator();
 
 function App() {
@@ -54,7 +54,7 @@ function App() {
         
         <Tab.Screen name="Home" tema={theme}  component={Home} options={{headerShown: false}}/>
         <Tab.Screen name="Search" tema={theme}  component={Search} options={{headerShown: false}}/>
-         <Tab.Screen name="reels"  tema={theme}  component={Home} options={{headerShown: false}}/>
+         <Tab.Screen name="reels"  tema={theme}  component={Reels} options={{headerShown: false}}/>
        {/* <Tab.Screen name="Shop" tema={theme}  component={Home} options={{headerShown: false}}/> */}
 
       </Tab.Navigator>
